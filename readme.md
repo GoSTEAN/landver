@@ -23,6 +23,6 @@ The project is divided into three main components:
 
 - `frontend/`: React-based web application
 - `backend/`: Node.js and Express-based API server
-- `contracts/`: Solidity smart contracts for the Ethereum blockchain
+- `contracts/`: Cairo smart contracts for the Ethereum blockchain
 
 ## Contributing
