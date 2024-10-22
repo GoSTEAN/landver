@@ -1,5 +1,18 @@
+use starknet::ContractAddress;
+use crate::interface::{Land, LandUse};
+#[starknet::interface]
+pub trait ILandRegistry<TContractState> {
+    fn register_land(
+        ref self: TContractState, location: felt252, area: u256, land_use: LandUse,
+    ) -> u256;
+    fn transfer_land(ref self: TContractState, land_id: u256, new_owner: ContractAddress);
+    fn get_land(self: @TContractState, land_id: u256) -> Land;
+
+    fn update_land(ref self: TContractState, land_id: u256, area: u256, land_use: LandUse);
+}
+
 #[starknet::contract]
-pub mod LandRegistryContract {
+mod LandRegistryContract {
     use starknet::{get_caller_address, get_block_timestamp, ContractAddress};
     use land_registry::interface::{ILandRegistry, Land, LandUse};
     use core::array::ArrayTrait;
@@ -104,35 +117,4 @@ pub mod LandRegistryContract {
         }
     }
 }
-// #[cfg(test)]
-// mod tests {
-//     use starknet::{get_caller_address, get_block_timestamp, ContractAddress};
-
-//     // Import the interface and dispatcher to be able to interact with the contract.
-//     use super::{SimpleContract, IContractDispatcher, ISimpleContractDispatcherTrait};
-
-//     // Import the deploy syscall to be able to deploy the contract.
-//     use starknet::{SyscallResultTrait, syscalls::deploy_syscall};
-//     use starknet::{get_contract_address, contract_address_const};
-
-//     // Use starknet test utils to fake the contract_address
-//     use starknet::testing::set_contract_address;
-
-//     // Deploy the contract and return its dispatcher.
-//     fn deploy(initial_value: u32) -> ISimpleContractDispatcher {
-//         // Declare and deploy
-//         let (contract_address, _) = deploy_syscall(
-//             SimpleContract::TEST_CLASS_HASH.try_into().unwrap(),
-//             0,
-//             array![initial_value.into()].span(),
-//             false
-//         )
-//             .unwrap_syscall();
-
-//         // Return the dispatcher.
-//         // The dispatcher allows to interact with the contract based on its interface.
-//         ISimpleContractDispatcher { contract_address }
-//     }
-
-// }
 

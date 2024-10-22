@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"avicave0nco92","package_name":"land_registry","contract_name":"LandRegistryContract","module_path":"land_registry::land_register::LandRegistryContract","artifacts":{"sierra":"land_registry_LandRegistryContract.contract_class.json","casm":"land_registry_LandRegistryContract.compiled_contract_class.json"}}]}
